@@ -1,0 +1,30 @@
+class Solution:
+    def numRescueBoats(self, people: List[int], limit: int) -> int:
+        #greedy? for o(N)
+        #sorting might give o(nlogn)
+        #3 -+ 5
+        #boat1: (3), baot 2(5), boat3:(3), boat 4(4)
+        
+        #ex2:
+        #boat1: 3, boat 2: 2, boat 3, 2,1 
+         
+        #ex. [3,3,3,1,1,1] = 4
+        # b1: 3, B2: 3, B3, 3,1, B4 1,1
+        # ANSWER 3 
+        #greedy can fail
+        #2 pointer sorted array? 
+        
+        #[3,3,4,5]
+        #start on big end
+        #seems to work
+        people.sort()
+        l = 0
+        r = len(people)-1
+        result = 0
+        while l <=r:
+            remain = limit - people[r]
+            r -=1
+            result +=1
+            if l<=r and remain >=people[l]:
+                l +=1
+        return result
