@@ -1,0 +1,19 @@
+class Solution:
+    def lengthOfLongestSubstring(self, s: str) -> int:
+        #find the length not the actual substring
+        #bruteforce for every letter find a string untill repeat letter something like o(n^2)
+        #probably keep track of current max
+        #sorting does nothing
+        #sliding window? 
+        #using set we know we have duplicates!
+        
+        current_set = set()
+        l = 0
+        res = 0 
+        for r in range(len(s)):
+            while s[r] in current_set:
+                current_set.remove(s[l])
+                l += 1
+            current_set.add(s[r])
+            res = max(res, r-l +1)
+        return res
