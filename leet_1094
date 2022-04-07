@@ -1,0 +1,23 @@
+class Solution:
+    def carPooling(self, trips: List[List[int]], capacity: int) -> bool:
+        # capacity is seats avaible
+        # only goes east 
+        # trips pass,from and to 
+        #oh ok so only goes one direct 
+        
+        #print(trips)
+        trips.sort(key = lambda t:t[1])
+        #print(trips)
+        minHeap = [] #storing pair of [(end, passenges)]
+        current_pass = 0
+        #each t is the triple digiit array 
+        for t in trips:
+            numPass, start, end = t
+            while minHeap and minHeap[0][0] <=start:
+                current_pass -= minHeap[0][1]
+                heapq.heappop(minHeap)
+            current_pass += numPass
+            if current_pass > capacity:
+                return False 
+            heapq.heappush(minHeap,[end,numPass])
+        return True 
